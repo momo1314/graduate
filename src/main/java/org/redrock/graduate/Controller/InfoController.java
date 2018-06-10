@@ -33,17 +33,6 @@ public class InfoController {
             stu.setNickname(URLDecoder.decode(request.getParameter("nickname"), "UTF-8"));
             stu.setState(200);
             session.setAttribute("stu", stu);
-//            Connection connection = DBCPFactory.getConnection();
-//            String sql="";
-//            try {
-//                PreparedStatement pst = connection.prepareStatement(sql);
-//                pst.setString(1, stu.getOpenid());
-//                pst.setString(2, stu.getNickname());
-//                pst.setString(3, stu.getHeadimgurl());
-//                pst.execute();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
             stu.setOpenid(null);
             return new ResponseEntity<>(stu, HttpStatus.valueOf(200));
         }else {
