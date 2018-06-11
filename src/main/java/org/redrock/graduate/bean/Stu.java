@@ -10,5 +10,6 @@ public class Stu {
     String openid;
     String nickname;
     String headimgurl;
+    String usernumber;
     int state;
 }

@@ -44,17 +44,17 @@ public class UplController {
     @PostMapping("/u/upload") // //new annotation since 4.3
     public ResponseEntity<Msg> singleFileUpload(@RequestParam("b64f") String base64, @RequestParam(value="name",required = false,defaultValue="") String name) {
         Msg msg = new Msg();
-        logger.info("开始将b64转换为MultipartFile");
+        logger.info("b64 to MultipartFile");
         MultipartFile file = Base64ToMultipartFile.base64ToMultipart(base64);
-        logger.info("检查file状态");
+        logger.info("check file");
         if (file.isEmpty()) {
-            logger.info("非/空文件流");
+            logger.info("empty file");
             msg.setMsg("no file");
             msg.setState(400);
             return new ResponseEntity<>(msg, HttpStatus.valueOf(400));
         }
         String OriginalFilename=file.getOriginalFilename();
-        logger.info("获取file名字并检查文件");
+        logger.info("get file name");
         String suffix = OriginalFilename.substring(OriginalFilename.lastIndexOf(".")).toLowerCase();
         Random rand = new Random();
         //重命名
@@ -62,21 +62,21 @@ public class UplController {
         String Newfilename=filename+suffix;
         if (fileTypes.contains(suffix)) {
             try {
-                logger.info("尝试上传");
+                logger.info("uploading");
                 byte[] bytes = file.getBytes();
                 Path path = Paths.get(UPLOADED_FOLDER + Newfilename);
                 Files.write(path, bytes);
             } catch (IOException e) {
-                logger.info("上传失败");
+                logger.info("upload fail");
                 e.printStackTrace();
             }
-            logger.info("上传成功");
+            logger.info("upload success");
             msg.setMsg("success");
             msg.setState(200);
             return new ResponseEntity<>(msg, HttpStatus.valueOf(200));
 
         }else {
-            logger.info("文件非图片格式,请检查文件后重新发送");
+            logger.info("error suffix");
             msg.setMsg("some error");
             msg.setState(500);
             return new ResponseEntity<>(msg, HttpStatus.valueOf(500));
