@@ -8,7 +8,8 @@ import com.alibaba.fastjson.JSONObject;
  */
 public class FindStu {
     public static String findStu(String openid) {
-        String url = "https://wx.idsbllp.cn/MagicLoop/index.php?s=/addon/UserCenter/UserCenter/getStuInfoByOpenId&openId=" + openid;
+        //String url = "https://wx.idsbllp.cn/MagicLoop/index.php?s=/addon/UserCenter/UserCenter/getStuInfoByOpenId&openId=" + openid;
+        String url= "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/UserCenter/UserCenter/getStuInfoByOpenId&openId="+openid;
         String res = CurlUtil.getContent(url, null, "GET");
         JSONObject jsonObject = JSON.parseObject(res);
         if (jsonObject.getInteger("status") == 200) {
@@ -20,7 +21,7 @@ public class FindStu {
     }
 
     public static void main(String[] args) {
-        String test = findStu("ouRCyjpwNN0vK5zROz6ygn9oe5I");
+        String test = findStu("ouRCyjpwNN0vK5zROz6ygn9oe5IE");
         System.out.println(test);
 
     }

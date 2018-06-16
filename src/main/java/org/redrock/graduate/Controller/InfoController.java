@@ -49,7 +49,6 @@ public class InfoController {
         if(session.getAttribute("stu")!=null&&session.getAttribute("stu")!="") {
             logger.info("have session");
             stu = (Stu) session.getAttribute("stu");
-            stu.setOpenid(null);
             stu.setState(200);
             return new ResponseEntity<>(stu, HttpStatus.valueOf(200));
         }else{
